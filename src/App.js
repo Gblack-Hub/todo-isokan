@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import AddTodo from "./components/AddTodo";
+import Header from "./components/Header";
+import Todos from "./components/Todos";
 
 function App() {
+  const [todos, setTodos] = useState([
+    "Go to School",
+    "Do the dishes",
+    "Walk the dog.",
+  ]);
+
+  //receive the prop from the child component using a parameter.
+  const getTheCollectedTodo = (collectedTodo) => {
+    setTodos([...todos, collectedTodo]);
+  };
+
+  const removeTodo = (indexToBeRemoved) => {
+    // logic to remove todo
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <AddTodo getTodo={getTheCollectedTodo} />
+      <Todos todos={todos} />
     </div>
   );
 }
